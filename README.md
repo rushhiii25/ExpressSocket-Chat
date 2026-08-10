@@ -91,7 +91,7 @@ NODE_ENV=development
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/ExpressSocket-Chat.git
+   git clone https://github.com/rushhiii25/ExpressSocket-Chat.git
    cd ExpressSocket-Chat
    ```
 
