@@ -1,0 +1,9 @@
+{
+  "appId": "com.pulsechat.app",
+  "appName": "PulseChat",
+  "webDir": "dist",
+  "server": {
+    "url": "https://pulse-chat-app.onrender.com",
+    "cleartext": true
+  }
+}
