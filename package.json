@@ -1,0 +1,23 @@
+{
+  "name": "pulse-chat-app",
+  "version": "1.0.0",
+  "description": "Real-Time Chat Application built with React, Node.js, Express, Socket.io, and SQLite",
+  "main": "backend/server.js",
+  "scripts": {
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "cd backend && node server.js",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "chat",
+    "react",
+    "socket.io",
+    "express",
+    "sqlite",
+    "realtime"
+  ],
+  "author": "Rushikesh Bhosale",
+  "license": "ISC"
+}
