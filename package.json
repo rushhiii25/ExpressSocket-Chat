@@ -4,7 +4,7 @@
   "description": "Real-Time Chat Application built with React, Node.js, Express, Socket.io, and SQLite",
   "main": "backend/server.js",
   "scripts": {
-    "postinstall": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install --include=dev && npm run build",
     "start": "cd backend && node server.js",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
