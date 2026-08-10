@@ -8,4 +8,8 @@ router.post('/login', userController.loginUser);
 // GET /api/users
 router.get('/', userController.getUsers);
 
+// POST /api/users/clear & DELETE /api/users/clear
+router.post('/clear', userController.clearAllUsers);
+router.delete('/clear', userController.clearAllUsers);
+
 module.exports = router;

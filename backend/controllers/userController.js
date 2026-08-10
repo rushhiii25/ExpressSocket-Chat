@@ -87,6 +87,18 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+// Clear all users and messages for clean reset
+exports.clearAllUsers = async (req, res) => {
+  try {
+    await dbRun(`DELETE FROM users`);
+    await dbRun(`DELETE FROM messages`);
+    res.json({ success: true, message: 'All users and messages cleared successfully' });
+  } catch (err) {
+    console.error('Error clearing users:', err.message);
+    res.status(500).json({ success: false, error: 'Failed to clear users database' });
+  }
+};
+
 // Get all registered users
 exports.getUsers = async (req, res) => {
   try {
