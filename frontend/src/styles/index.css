@@ -88,7 +88,25 @@ html, body {
   position: relative;
 }
 
-/* Responsive Mobile Layout Rules */
+/* Responsive Layout Rules (Auto-adapts for PC & Phone) */
+@media (min-width: 769px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .sidebar {
+    position: relative !important;
+    transform: none !important;
+    width: 280px !important;
+    flex-shrink: 0 !important;
+    height: 100% !important;
+  }
+
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .mobile-menu-btn {
     display: inline-flex !important;
@@ -99,6 +117,8 @@ html, body {
     top: 0;
     left: 0;
     bottom: 0;
+    width: 80% !important;
+    max-width: 300px !important;
     height: 100dvh !important;
     transform: translateX(-100%);
     box-shadow: var(--shadow-lg);
@@ -117,6 +137,10 @@ html, body {
     -webkit-backdrop-filter: blur(4px);
     z-index: 45;
     animation: fadeIn 0.2s ease-out;
+  }
+
+  .chat-input-container {
+    padding: 10px 12px !important;
   }
 }
 

@@ -25,7 +25,6 @@ export default function ChatHeader({ onOpenMobile }) {
         <button
           onClick={onOpenMobile}
           className="btn-icon mobile-menu-btn"
-          style={{ display: 'none' }}
         >
           <Menu size={20} />
         </button>
