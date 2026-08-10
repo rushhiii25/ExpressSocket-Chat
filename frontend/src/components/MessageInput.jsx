@@ -49,7 +49,7 @@ export default function MessageInput() {
   };
 
   return (
-    <div style={{
+    <div className="chat-input-container" style={{
       padding: '16px 24px',
       background: 'var(--panel-bg)',
       borderTop: '1px solid var(--panel-border)',

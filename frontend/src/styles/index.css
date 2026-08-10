@@ -49,21 +49,29 @@
   padding: 0;
 }
 
-body {
+html, body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
   color: var(--text-main);
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  height: 100dvh;
+  width: 100%;
+  width: 100dvw;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #root {
   width: 100%;
   height: 100%;
+  height: 100dvh;
   display: flex;
 }
 
@@ -72,11 +80,44 @@ body {
   display: flex;
   width: 100%;
   height: 100%;
+  height: 100dvh;
   background: var(--panel-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   overflow: hidden;
   position: relative;
+}
+
+/* Responsive Mobile Layout Rules */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: inline-flex !important;
+  }
+
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh !important;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+    z-index: 50 !important;
+  }
+
+  .sidebar-mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 45;
+    animation: fadeIn 0.2s ease-out;
+  }
 }
 
 /* Custom Scrollbars */

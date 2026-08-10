@@ -15,6 +15,13 @@ export default function App() {
     <div className="app-container">
       {!user && <LoginModal />}
 
+      {showMobileSidebar && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setShowMobileSidebar(false)}
+        />
+      )}
+
       <Sidebar
         showMobile={showMobileSidebar}
         onCloseMobile={() => setShowMobileSidebar(false)}
