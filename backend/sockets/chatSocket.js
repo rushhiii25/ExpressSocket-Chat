@@ -26,6 +26,13 @@ module.exports = function (io) {
   io.on('connection', (socket) => {
     console.log(`Socket connected: ${socket.id}`);
 
+    // Send initial registered user list immediately to newly connected client
+    dbAll(`SELECT id, username, avatar, status, last_seen FROM users ORDER BY username ASC`)
+      .then(users => {
+        socket.emit('user_status_change', { users });
+      })
+      .catch(err => console.error('Error sending initial users list:', err.message));
+
     // User identification / login on socket connection
     socket.on('user_join', async (userData) => {
       if (!userData || !userData.id) return;
@@ -40,7 +47,7 @@ module.exports = function (io) {
       // Update online status in DB
       try {
         await dbRun(`UPDATE users SET status = 'online', last_seen = CURRENT_TIMESTAMP WHERE id = ?`, [userData.id]);
-        const users = await dbAll(`SELECT id, username, avatar, status, last_seen FROM users`);
+        const users = await dbAll(`SELECT id, username, avatar, status, last_seen FROM users ORDER BY username ASC`);
         io.emit('user_status_change', { userId: userData.id, status: 'online', users });
       } catch (err) {
         console.error('Failed to update user online status:', err.message);

@@ -83,15 +83,23 @@ export const SocketProvider = ({ children }) => {
     }
   }, []);
 
-  // Fetch initial rooms & user list
+  // Fetch initial rooms & user list and set up periodic refresh
   useEffect(() => {
+    const loadUsers = () => {
+      api.fetchUsers().then(res => {
+        if (res && Array.isArray(res)) setUsersList(res);
+      }).catch(err => console.error('Failed to fetch users:', err));
+    };
+
     api.fetchRooms().then(res => {
       if (res && res.length) setRooms(res);
     }).catch(err => console.error('Failed to fetch rooms:', err));
 
-    api.fetchUsers().then(res => {
-      if (res) setUsersList(res);
-    }).catch(err => console.error('Failed to fetch users:', err));
+    loadUsers();
+
+    // Refresh members list every 5 seconds to ensure accuracy across devices
+    const interval = setInterval(loadUsers, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   // Load history whenever active room changes
@@ -171,6 +179,9 @@ export const SocketProvider = ({ children }) => {
       if (socket && socket.connected) {
         socket.emit('user_join', userData);
       }
+      api.fetchUsers().then(res => {
+        if (res && Array.isArray(res)) setUsersList(res);
+      }).catch(() => {});
       return userData;
     } catch (err) {
       throw err;
