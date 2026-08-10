@@ -13,25 +13,30 @@ export default function MessageInput() {
   const typingTimeoutRef = useRef(null);
 
   const handleInputChange = (e) => {
-    setText(e.target.value);
-
-    // Notify typing state
-    notifyTyping(true);
+    const val = e.target.value;
+    setText(val);
 
     if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-    typingTimeoutRef.current = setTimeout(() => {
+
+    if (!val.trim()) {
+      // Immediately stop typing indicator if text was deleted/cleared
       notifyTyping(false);
-    }, 1500);
+    } else {
+      notifyTyping(true);
+      typingTimeoutRef.current = setTimeout(() => {
+        notifyTyping(false);
+      }, 1500);
+    }
   };
 
   const handleSend = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
 
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    notifyTyping(false);
     sendMessage(text.trim(), 'text');
     setText('');
-    notifyTyping(false);
-    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
   };
 
   const handleSendImage = (e) => {
